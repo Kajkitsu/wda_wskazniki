@@ -1,53 +1,364 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Wstęp do algorytmiki</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="dist/reset.css">
-		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css">
+	<title>Wstęp do algorytmiki</title>
 
-		<!-- Theme used for syntax highlighted code -->
-		<link rel="stylesheet" href="plugin/highlight/monokai.css">
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>
-					<h2>Wstęp do algorytmiki</h2>
-					<h3>Wskaźniki</h3>
-				</section>
+	<link rel="stylesheet" href="dist/reset.css">
+	<link rel="stylesheet" href="dist/reveal.css">
+	<link rel="stylesheet" href="dist/theme/black.css">
+
+	<!-- Theme used for syntax highlighted code -->
+	<link rel="stylesheet" href="plugin/highlight/monokai.css">
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<h2>Wstęp do algorytmiki</h2>
+				<h3>Wskaźniki</h3>
+			</section>
+			<section>
 				<section>
 					<h3>Czym jest wskaźnik? Intuicyjne wyjaśnienie na przykładzie</h3>
-					<section>
-						<p>
-							Wyobraź sobie, że masz <b>książkę</b>. Książka ta znajduje się na pewnej półce w Twoim pokoju. Aby ją znaleźć, potrzebujesz
-							znać <b>adres</b> tej półki. Wskaźnik w C++ działa właśnie w podobny sposób. Jest to <b>zmienna</b>, która przechowuje adres innego
-							miejsca w pamięci komputera.
-						</p>
-					</section>
-					
+					<p>
+						Wyobraź sobie, że masz <b>książkę</b>. Książka ta znajduje się na pewnej półce w Twoim pokoju.
+						Aby ją znaleźć, potrzebujesz
+						znać <b>adres</b> tej półki. Wskaźnik w C++ działa właśnie w podobny sposób. Jest to
+						<b>zmienna</b>, która przechowuje adres innego
+						miejsca w pamięci komputera.
+					</p>
 				</section>
-			</div>
+				<section>
+					<pre><code class="hljs cpp" data-trim>
+int liczba = 10;
+int* wskaznikNaLiczbe = &liczba;
+											</code></pre>
+					<small>
+						W tym przykładzie:
+						<ul>
+							<li>
+								<b>liczba</b> to zmienna typu <b>int</b> przechowująca wartość 10.
+							</li>
+							<li>
+								<b>wskaznikNaLiczbe</b> to wskaźnik typu <b>int*</b>, który przechowuje
+								adres zmiennej
+								<b>liczba</b>.
+							</li>
+							<li>
+								Operator <b>&</b> (adres) pobiera adres zmiennej <b>liczba</b> i zapisuje go
+								w zmiennej
+								<b>wskaznikNaLiczbe</b>.
+							</li>
+						</ul>
+					</small>
+				</section>
+				<section>
+					<h3>Różnica między zmienną a wskaźnikiem:</h3>
+					<p>
+					<ul>
+						<li><b>Zmienna:</b>
+							<ul>
+								<li>Przechowuje wartość bezpośrednio</li>
+								<li>Ma określony typ danych (np. <b>int</b>, <b>char</b>, <b>float</b>)</li>
+								<li>Dostęp do wartości zmiennej odbywa się za pomocą jej nazwy</li>
+							</ul>
+						</li>
+						<li><b>Wskaźnik:</b>
+							<ul>
+								<li>Przechowuje adres wartości.</li>
+								<li>Ma typ danych wskazujący na inny typ (np. <b>int*</b>, <b>char*</b>, <b>float*</b>)
+								</li>
+								<li>Dostęp do wartości wskazywanej przez wskaźnik odbywa się za pomocą operatora
+									dereferencji (<b>*</b>)</li>
+							</ul>
+						</li>
+					</ul>
+					</p>
+				</section>
+				<section>
+					<h3>Typy wskaźników</h3>
+					<small>
+						Typ wskaźnika określa typ zmiennej lub obiektu, do którego wskazuje.
+					</small>
+					<small>
+						Przykłady typów wskaźników:
+					</small>
+					<small>
+						<ul>
+							<li><b>int*:</b> Wskaźnik na zmienną typu int.</li>
+							<li><b>char*:</b> Wskaźnik na zmienną typu char (pojedynczy znak).</li>
+							<li><b>double*:</b> Wskaźnik na zmienną typu double (liczba zmiennoprzecinkowa).</li>
+							<li><b>TablicaTypu*:</b> Wskaźnik na tablicę danego typu (np. int* oznacza wskaźnik na
+								tablicę
+								zmiennych typu int).</li>
+						</ul>
+					</small>
+					<small style="margin-top: 10px;">
+						Możemy również mieć wskaźniki na wskaźniki. Oznacza to, że wskaźnik może przechowywać adres
+						innego
+						wskaźnika, który z kolei może przechowywać adres zmiennej lub obiektu.
+					</small>
+				</section>
+				<section>
+					<h3>Przykład:</h3>
+					<pre><code class="hljs cpp" data-trim>
+int liczba = 10;
+int* wskaznikNaLiczbe = &liczba;
+int** wskaznikNaWskaznikNaLiczbe = &wskaznikNaLiczbe;
+				</code></pre>
+					<small>
+						W tym przykładzie:
+						<ul>
+							<li><b>liczba</b> to zmienna typu <b>int</b> przechowująca wartość 10.</li>
+							<li><b>wskaznikNaLiczbe</b> to wskaźnik typu <b>int*</b>, który przechowuje adres zmiennej
+								<b>liczba</b>.
+							</li>
+							<li><b>wskaznikNaWskaznikNaLiczbe</b> to wskaźnik typu <b>int**</b>, który przechowuje adres
+								wskaźnika <b>wskaznikNaLiczbe</b>.</li>
+						</ul>
+					</small>
+				</section>
+				<section>
+					<h3>Operator adresowania <code>&</code> i dereferencji <code>*</code></h3>
+					<p>
+						Operator <code>&</code> służy do pobierania adresu zmiennej.
+					</p>
+					<p>
+						Operator <code>*</code> służy do pobierania wartości wskazywanej przez wskaźnik.
+					</p>
+
+					<pre><code class="hljs cpp" data-trim>
+int liczba = 10;
+int* wskaznikNaLiczbe = &liczba;
+					</code></pre>
+					<p>
+						W tym przykładzie <code>&liczba</code> zwraca adres zmiennej <code>liczba</code>, który jest
+						przechowywany w zmiennej <code>wskaznikNaLiczbe</code>.
+					</p>
+				</section>
+				<section>
+					<h3>Wartość adresu:</h3>
+					<p>Wartość adresu jest zazwyczaj <b>liczbą szesnastkową</b>, która reprezentuje fizyczną lokalizację
+						zmiennej w pamięci komputera.
+						Dokładny format wyświetlania adresu zależy od kompilatora i systemu operacyjnego.</p>
+				</section>
+				<section>
+					<h3>Wyświetlanie adresu w terminalu:</h3>
+					<p>Aby wyświetlić adres zmiennej w terminalu, można użyć operatora <b>*</b> (dereferencji) wraz z
+						funkcją <b>std::cout</b>.</p>
+				</section>
+				<section>
+
+					<pre><code class="hljs cpp" data-trim><script type="text/template">
+					
+#include <iostream>
+
+int main() {
+    int liczba = 10;
+    int* wskaźnikNaLiczbę = &liczba;
+
+    std::cout << "Adres zmiennej 'liczba': " << 
+								wskaźnikNaLiczbę << std::endl;
+    return 0; 
+}
+					</script></code></pre>
+					<p>Po uruchomieniu tego kodu w terminalu zostanie wyświetlony adres zmiennej <b>liczba</b>. Dokładny
+						format
+						adresu może się różnić
+						w zależności od kompilatora i systemu operacyjnego.</p>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Przkład wykorzystania wskaźników</h3>
+					<pre style="font-size: 16px"><code class="hljs bash" data-trim>
+						g++ -o main main.cpp
+						./main
+					</code></pre>
+				</section>
+				<section>
+					<pre style="font-size: 16px"><code class="hljs cpp" data-trim><script type="text/template">
+#include <iostream>
+
+int main() {
+    int a = 5;
+    int b = 10;
+
+    int *wskaźnik1 = &a;
+    int *wskaźnik2 = &b;
+
+    // Zamiana adresów
+    int *temp = wskaźnik1;
+    wskaźnik1 = wskaźnik2;
+    wskaźnik2 = temp;
+
+    // Sprawdzenie rezultatu
+    std::cout << "Wartość zmiennej a: " << a << std::endl;
+    std::cout << "Wartość zmiennej b: " << b << std::endl;
+    std::cout << "Wartość *wskaźnik1: " << *wskaźnik1 << std::endl;
+    std::cout << "Wartość *wskaźnik2: " << *wskaźnik2 << std::endl;
+    std::cout << "Wartość wskaźnik1: " << wskaźnik1 << std::endl;
+    std::cout << "Wartość wskaźnik2: " << wskaźnik2 << std::endl;
+    std::cout << "Wartość &wskaźnik1: " << &wskaźnik1 << std::endl;
+    std::cout << "Wartość &wskaźnik2: " << &wskaźnik2 << std::endl;
+    std::cout << "Wartość &a: " << &a << std::endl;
+    std::cout << "Wartość &b: " << &b << std::endl;
+
+}
+															</script></code></pre>
+				</section>
+				<section>
+					<pre style="font-size: 16px"><code class="hljs cpp" data-trim><script type="text/template">
+#include <iostream>
+
+int main() {
+    int leader = 800;
+    int *member1, *member2;
+
+    member1 = &leader;
+    member2 = &leader;
+
+    std::cout<< leader << ";" << *member1 << ";" << *member2 << std::endl;
+    leader = 1000;
+    std::cout<< leader << ";" << *member1 << ";" << *member2 << std::endl;
+    *member1 = 1200;
+    std::cout<< leader << ";" << *member1 << ";" << *member2 << std::endl;
+
+    return 0;
+}
+																									</script></code></pre>
+
+				</section>
+
+				<section>
+					<pre style="font-size: 16px"><code class="hljs cpp" data-trim><script type="text/template">
+#include <iostream>
+
+void changeVariable(int value) {
+    value = 100;
+}
+
+void changeVariableByPointer(int * value) {
+    *value = 200;
+}
+
+int main() {
+    int myValue = 50;
+    std::cout << myValue << std::endl;
+    changeVariable(myValue);
+    std::cout << myValue << std::endl;
+    changeVariableByPointer(&myValue);
+    std::cout << myValue << std::endl;
+
+    return 0;
+}
+</script></code></pre>
+
+				</section>
+				<section>
+					<pre style="font-size: 16px"><code class="hljs cpp" data-trim><script type="text/template">
+#include <iostream>
+
+int sumOfArray(int *array, int size) {
+    int sum = 0;
+    for (int i = 0; i < size; i++) {
+        sum += array[i];
+    }
+    return sum;
+}
+
+int main() {
+    int *myArray = new int[5];
+    myArray[0] = 1;
+    myArray[1] = 2;
+    myArray[2] = 3;
+    myArray[3] = 4;
+    myArray[4] = 5;
+    std::cout << sumOfArray(myArray, 5) << std::endl;
+    return 0;
+
+}
+</script></code></pre>
+
+				</section>
+
+				<section>
+					<pre style="font-size: 16px"><code class="hljs cpp" data-trim><script type="text/template">
+#include <iostream>
+
+int sizeOfArray(int *arrayBegin, int *arrayEnd) {
+    return (int) (&arrayBegin - &arrayEnd);
+}
+
+int main() {
+    int *myArray = new int[5];
+    myArray[0] = 1;
+    myArray[1] = 2;
+    myArray[2] = 3;
+    myArray[3] = 4;
+    myArray[4] = 5;
+    int *lastElementOfArray = &myArray[4];
+
+    std::cout << "sizeOfArray:" << sizeOfArray(myArray, lastElementOfArray) << std::endl;
+    
+    return 0;
+
+}
+</script></code></pre>
+
+				</section>
+
+
+			</section>
+			<section>
+				<h3>Zadania</h3>
+				<small>
+					<ol>
+						<li>Napisz funkcję, która przyjmuje jako argument wskaźnik na pierwszy i ostatni element tablicy
+							i
+							oblicza jej rozmiar</li>
+						<li>Napisz funkcję, która przyjmuje jako argument wskaźnik na pierwszy i ostatni element
+							tablicy.
+							Funkcja wyświetla
+							środkowy element tablicy, jeśli rozmiar tablicy jest podzielny przez 2 to wyświetla dwa
+							elementy
+							najbliższe środka.</li>
+						<li>Napisz funkcję, która przyjmuje jako argumenty wskaźniki na dwie tablice dwuwymiarowe, a
+							następnie kopiuje zawartość
+							pierwszej tablicy do drugiej.</li>
+						<li>Napisz funkcję, która będzie wykonywać operacje dodawania, odejmowania, mnożenia na
+							tablicach
+							dwuwymiarowych
+							(macierzach).</li>
+						<li>Napisz funkcje, która będzie zwracać różnice między największym i najmniejszym elementem
+							tablicy.</li>
+					</ol>
+				</small>
+
+			</section>
 		</div>
+	</div>
 
-		<script src="dist/reveal.js"></script>
-		<script src="plugin/notes/notes.js"></script>
-		<script src="plugin/markdown/markdown.js"></script>
-		<script src="plugin/highlight/highlight.js"></script>
-		<script>
-			// More info about initialization & config:
-			// - https://revealjs.com/initialization/
-			// - https://revealjs.com/config/
-			Reveal.initialize({
-				hash: true,
+	<script src="dist/reveal.js"></script>
+	<script src="plugin/notes/notes.js"></script>
+	<script src="plugin/markdown/markdown.js"></script>
+	<script src="plugin/highlight/highlight.js"></script>
+	<script>
+		// More info about initialization & config:
+		// - https://revealjs.com/initialization/
+		// - https://revealjs.com/config/
+		Reveal.initialize({
+			hash: true,
 
-				// Learn about plugins: https://revealjs.com/plugins/
-				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-			});
-		</script>
-	</body>
+			// Learn about plugins: https://revealjs.com/plugins/
+			plugins: [RevealMarkdown, RevealHighlight, RevealNotes]
+		});
+	</script>
+</body>
+
 </html>
