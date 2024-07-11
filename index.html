@@ -292,7 +292,7 @@ int main() {
 #include <iostream>
 
 int sizeOfArray(int *arrayBegin, int *arrayEnd) {
-    return (int) (&arrayBegin - &arrayEnd);
+    return (int)(arrayEnd - arrayBegin);
 }
 
 int main() {
